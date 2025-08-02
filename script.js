@@ -1311,3 +1311,5 @@ style.textContent = `
 `;
 
 document.head.appendChild(style);
+document.getElementById('quickActions').style.display = 'none';
+
