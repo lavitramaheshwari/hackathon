@@ -1331,8 +1331,4 @@ body {
 ::selection {
     background: rgba(139, 92, 246, 0.3);
     color: white;
-
-}
-#quickActions {
-    display: none;
 }
