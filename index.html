@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeSpace - Anonymous Support for Students</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+    <div id="particles"></div>
+
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-logo">SafeSpace</div>
+            <div class="loader-text">Creating your safe space...</div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <span>🛡️</span>
+                <span>SafeSpace</span>
+            </div>
+            
+            <div class="user-section">
+                <div class="mood-tracker">
+                    <span>Today's Mood:</span>
+                    <button class="mood-btn" onclick="setMood('happy')" title="Happy">😊</button>
+                    <button class="mood-btn" onclick="setMood('okay')" title="Okay">😐</button>
+                    <button class="mood-btn" onclick="setMood('sad')" title="Sad">😢</button>
+                    <button class="mood-btn" onclick="setMood('anxious')" title="Anxious">😰</button>
+                    <button class="mood-btn" onclick="setMood('angry')" title="Angry">😠</button>
+                </div>
+                
+                <div class="user-avatar" onclick="showAvatarSelection()">
+                    <span class="avatar-icon" id="userAvatar">🦊</span>
+                    <div>
+                        <div id="userName">Anonymous Fox</div>
+                        <div class="karma-score">
+                            <span>⭐</span>
+                            <span id="karmaPoints">0</span> karma
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <nav>
+                <a href="#" class="nav-item active" onclick="showSection('chat')" data-section="chat">
+                    <span class="nav-icon">💬</span>
+                    <span>Support Chat</span>
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('games')" data-section="games">
+                    <span class="nav-icon">🎮</span>
+                    <span>Zen Games</span>
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('breathing')" data-section="breathing">
+                    <span class="nav-icon">🧘</span>
+                    <span>Calm Corner</span>
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('community')" data-section="community">
+                    <span class="nav-icon">👥</span>
+                    <span>Community</span>
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('resources')" data-section="resources">
+                    <span class="nav-icon">📚</span>
+                    <span>Resources</span>
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('stats')" data-section="stats">
+                    <span class="nav-icon">📊</span>
+                    <span>My Progress</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content-area" id="mainContent">
+            <!-- Chat Section -->
+            <section id="chatSection" class="content-section active">
+                <!-- Support Type Selector -->
+                <div class="support-selector">
+                    <div class="support-type active" onclick="selectSupport('academic')" id="academicSupport">
+                        <div class="support-icon">📚</div>
+                        <div class="support-title">Academic Help</div>
+                        <div class="support-desc">Homework, exams, study tips</div>
+                    </div>
+                    <div class="support-type" onclick="selectSupport('social')" id="socialSupport">
+                        <div class="support-icon">👥</div>
+                        <div class="support-title">Social Support</div>
+                        <div class="support-desc">Friends, relationships, peer issues</div>
+                    </div>
+                    <div class="support-type" onclick="selectSupport('emotional')" id="emotionalSupport">
+                        <div class="support-icon">💝</div>
+                        <div class="support-title">Emotional Care</div>
+                        <div class="support-desc">Feelings, stress, mental health</div>
+                    </div>
+                </div>
+
+                <!-- Chat Integration -->
+                <div class="chat-wrapper">
+                    <div class="chat-header">
+                        <div class="chat-title">
+                            <span>🤖</span>
+                            <span id="chatTitle">Academic Support Assistant</span>
+                        </div>
+                        <div class="chat-status">
+                            <span class="status-dot"></span>
+                            <span>Always here for you</span>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions Based on Support Type -->
+                    <div class="quick-actions" id="quickActions">
+                        <!-- Dynamically populated -->
+                    </div>
+
+                    <!-- CHATBOT INTEGRATION -->
+                    <div class="chatbot-container">
+                        <iframe 
+                            src="https://lavim.pythonanywhere.com/" 
+                            class="chatbot-iframe"
+                            id="chatbot"
+                            title="Anonymous Support Chat">
+                        </iframe>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Games Section -->
+            <section id="gamesSection" class="content-section">
+                <h2>🎮 Zen Games - Relax Your Mind</h2>
+                <div class="games-grid">
+                    <div class="game-card" onclick="startMemoryGame()">
+                        <div class="game-icon">🧠</div>
+                        <h3>Memory Match</h3>
+                        <p>Train your focus with this calming memory game</p>
+                        <div class="game-stats">
+                            <span>Best Score: <span id="memoryBest">0</span></span>
+                        </div>
+                    </div>
+                    <div class="game-card" onclick="startColorMatch()">
+                        <div class="game-icon">🎨</div>
+                        <h3>Color Harmony</h3>
+                        <p>Find peace in matching colors</p>
+                        <div class="game-stats">
+                            <span>Best Score: <span id="colorBest">0</span></span>
+                        </div>
+                    </div>
+                    <div class="game-card" onclick="startWordPuzzle()">
+                        <div class="game-icon">📝</div>
+                        <h3>Positive Words</h3>
+                        <p>Find uplifting words in the puzzle</p>
+                        <div class="game-stats">
+                            <span>Words Found: <span id="wordsBest">0</span></span>
+                        </div>
+                    </div>
+                    <div class="game-card" onclick="startClickCalm()">
+                        <div class="game-icon">🎯</div>
+                        <h3>Click & Calm</h3>
+                        <p>Simple clicking game to release stress</p>
+                        <div class="game-stats">
+                            <span>High Score: <span id="clickBest">0</span></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Breathing Section -->
+            <section id="breathingSection" class="content-section">
+                <h2>🧘 Calm Corner - Find Your Peace</h2>
+                <div class="calm-activities">
+                    <div class="activity-card">
+                        <h3>Box Breathing Exercise</h3>
+                        <div class="breathing-container">
+                            <div class="breathing-circle" id="breathingCircle">
+                                <div class="breathing-text" id="breathingText">Click Start</div>
+                            </div>
+                            <button class="btn-primary" onclick="startBreathingExercise()">Start Breathing</button>
+                            <div class="breathing-instructions">
+                                <p>Follow the circle and text for a calming breathing pattern</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-card">
+                        <h3>Quick Meditation Timer</h3>
+                        <div class="meditation-timer">
+                            <div class="timer-display" id="meditationTimer">5:00</div>
+                            <div class="timer-controls">
+                                <button class="btn-secondary" onclick="setMeditationTime(1)">1 min</button>
+                                <button class="btn-secondary" onclick="setMeditationTime(3)">3 min</button>
+                                <button class="btn-secondary active" onclick="setMeditationTime(5)">5 min</button>
+                                <button class="btn-secondary" onclick="setMeditationTime(10)">10 min</button>
+                            </div>
+                            <button class="btn-primary" onclick="startMeditation()">Start Meditation</button>
+                        </div>
+                    </div>
+
+                    <div class="activity-card">
+                        <h3>Calming Sounds</h3>
+                        <div class="sound-options">
+                            <button class="sound-btn" onclick="playSound('rain')">🌧️ Rain</button>
+                            <button class="sound-btn" onclick="playSound('ocean')">🌊 Ocean</button>
+                            <button class="sound-btn" onclick="playSound('forest')">🌲 Forest</button>
+                            <button class="sound-btn" onclick="playSound('white')">⚪ White Noise</button>
+                        </div>
+                        <div class="volume-control">
+                            <span>Volume:</span>
+                            <input type="range" id="volumeSlider" min="0" max="100" value="50" onchange="adjustVolume()">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Community Section -->
+            <section id="communitySection" class="content-section">
+                <h2>👥 Anonymous Community Support</h2>
+                <div class="community-tabs">
+                    <button class="tab-btn active" onclick="showCommunityTab('posts')">Recent Posts</button>
+                    <button class="tab-btn" onclick="showCommunityTab('groups')">Support Groups</button>
+                    <button class="tab-btn" onclick="showCommunityTab('stories')">Success Stories</button>
+                </div>
+                
+                <div id="communityContent" class="community-content">
+                    <!-- Dynamically populated -->
+                </div>
+
+                <button class="fab" onclick="createPost()">
+                    <span>+</span>
+                </button>
+            </section>
+
+            <!-- Resources Section -->
+            <section id="resourcesSection" class="content-section">
+                <h2>📚 Helpful Resources</h2>
+                <div class="resources-grid">
+                    <div class="resource-card" onclick="openResource('study-tips')">
+                        <div class="resource-icon">📖</div>
+                        <h3>Study Tips & Techniques</h3>
+                        <p>Proven methods to improve your learning</p>
+                    </div>
+                    <div class="resource-card" onclick="openResource('time-management')">
+                        <div class="resource-icon">⏰</div>
+                        <h3>Time Management Guide</h3>
+                        <p>Balance school, life, and self-care</p>
+                    </div>
+                    <div class="resource-card" onclick="openResource('test-anxiety')">
+                        <div class="resource-icon">📝</div>
+                        <h3>Dealing with Test Anxiety</h3>
+                        <p>Strategies to stay calm during exams</p>
+                    </div>
+                    <div class="resource-card" onclick="openResource('making-friends')">
+                        <div class="resource-icon">🤝</div>
+                        <h3>Making Friends Guide</h3>
+                        <p>Tips for building meaningful connections</p>
+                    </div>
+                    <div class="resource-card" onclick="openResource('stress-relief')">
+                        <div class="resource-icon">😌</div>
+                        <h3>Stress Relief Techniques</h3>
+                        <p>Quick ways to calm your mind</p>
+                    </div>
+                    <div class="resource-card" onclick="openResource('self-care')">
+                        <div class="resource-icon">💝</div>
+                        <h3>Self-Care Basics</h3>
+                        <p>Taking care of your mental health</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section id="statsSection" class="content-section">
+                <h2>📊 Your Progress</h2>
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <h3>Mood Tracker</h3>
+                        <div class="mood-chart" id="moodChart">
+                            <!-- Mood visualization will go here -->
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Activity Stats</h3>
+                        <div class="activity-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Days Active:</span>
+                                <span class="stat-value" id="daysActive">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Games Played:</span>
+                                <span class="stat-value" id="gamesPlayed">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Breathing Sessions:</span>
+                                <span class="stat-value" id="breathingSessions">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Community Posts:</span>
+                                <span class="stat-value" id="communityPosts">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Achievements</h3>
+                        <div class="achievement-grid" id="achievementGrid">
+                            <!-- Dynamically populated -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+            <!-- Daily Progress -->
+            <div class="widget">
+                <div class="widget-title">
+                    <span>📈</span>
+                    <span>Today's Progress</span>
+                </div>
+                <div id="dailyProgress">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+
+            <!-- Quick Tips -->
+            <div class="widget">
+                <div class="widget-title">
+                    <span>💡</span>
+                    <span>Tip of the Day</span>
+                </div>
+                <div class="tip-content" id="dailyTip">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+
+            <!-- Upcoming Features -->
+            <div class="widget">
+                <div class="widget-title">
+                    <span>🎯</span>
+                    <span>Quick Actions</span>
+                </div>
+                <div class="quick-action-list">
+                    <button class="quick-action" onclick="showSection('breathing')">🧘 Quick Breathing</button>
+                    <button class="quick-action" onclick="showSection('games')">🎮 Play a Game</button>
+                    <button class="quick-action" onclick="showEmergency()">🆘 Crisis Support</button>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Emergency Support Button -->
+    <button class="emergency-btn" onclick="showEmergency()">
+        <span>🆘</span>
+        <span>Need Immediate Help?</span>
+    </button>
+
+    <!-- Modals -->
+    <!-- Avatar Selection Modal -->
+    <div class="modal" id="avatarModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('avatarModal')">✕</button>
+            <h2>Choose Your Avatar</h2>
+            <div class="avatar-grid">
+                <div class="avatar-option" onclick="selectAvatar('🦊', 'Fox')">🦊</div>
+                <div class="avatar-option" onclick="selectAvatar('🐼', 'Panda')">🐼</div>
+                <div class="avatar-option" onclick="selectAvatar('🦉', 'Owl')">🦉</div>
+                <div class="avatar-option" onclick="selectAvatar('🐰', 'Bunny')">🐰</div>
+                <div class="avatar-option" onclick="selectAvatar('🐱', 'Cat')">🐱</div>
+                <div class="avatar-option" onclick="selectAvatar('🐶', 'Dog')">🐶</div>
+                <div class="avatar-option" onclick="selectAvatar('🦁', 'Lion')">🦁</div>
+                <div class="avatar-option" onclick="selectAvatar('🐨', 'Koala')">🐨</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Modals -->
+    <!-- Memory Game Modal -->
+    <div class="modal" id="memoryGameModal">
+        <div class="modal-content game-modal">
+            <button class="close-modal" onclick="closeGame('memoryGameModal')">✕</button>
+            <h2>🧠 Memory Match</h2>
+            <div class="game-info">
+                <span>Score: <span id="memoryScore">0</span></span>
+                <span>Moves: <span id="memoryMoves">0</span></span>
+                <span>Time: <span id="memoryTime">0:00</span></span>
+            </div>
+            <div class="memory-grid" id="memoryGrid">
+                <!-- Game grid will be populated here -->
+            </div>
+            <button class="btn-primary" onclick="resetMemoryGame()">New Game</button>
+        </div>
+    </div>
+
+    <!-- Color Match Modal -->
+    <div class="modal" id="colorMatchModal">
+        <div class="modal-content game-modal">
+            <button class="close-modal" onclick="closeGame('colorMatchModal')">✕</button>
+            <h2>🎨 Color Harmony</h2>
+            <div class="game-info">
+                <span>Score: <span id="colorScore">0</span></span>
+                <span>Level: <span id="colorLevel">1</span></span>
+            </div>
+            <div class="color-game-container">
+                <div class="target-color" id="targetColor"></div>
+                <div class="color-options" id="colorOptions">
+                    <!-- Color options will be populated here -->
+                </div>
+            </div>
+            <div class="game-message" id="colorMessage"></div>
+        </div>
+    </div>
+
+    <!-- Post Creation Modal -->
+    <div class="modal" id="postModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('postModal')">✕</button>
+            <h2>Create Anonymous Post</h2>
+            <div class="post-form">
+                <select id="postCategory" class="post-select">
+                    <option value="">Select Category...</option>
+                    <option value="academic">Academic Help</option>
+                    <option value="social">Social Support</option>
+                    <option value="emotional">Emotional Support</option>
+                    <option value="general">General Discussion</option>
+                </select>
+                <input type="text" id="postTitle" class="post-input" placeholder="Post title...">
+                <textarea id="postContent" class="post-textarea" placeholder="Share your thoughts..."></textarea>
+                <button class="btn-primary" onclick="submitPost()">Post Anonymously</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resource Modal -->
+    <div class="modal" id="resourceModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('resourceModal')">✕</button>
+            <h2 id="resourceTitle"></h2>
+            <div id="resourceContent" class="resource-content">
+                <!-- Resource content will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Crisis Modal -->
+    <div class="modal" id="crisisModal">
+    <div class="modal-content crisis-content">
+        <h2>🆘 Crisis Support Resources</h2>
+        <p>You're not alone. Help is available 24/7 in Singapore:</p>
+        <div class="crisis-resources">
+            <div class="crisis-item">
+                <h3>🚨 Emergency</h3>
+                <p>Call <b>995</b> for ambulance/fire or <b>999</b> for police</p>
+            </div>
+            <div class="crisis-item">
+                <h3>📞 SOS (Samaritans of Singapore)</h3>
+                <p>24/7 Hotline: <b>1-767</b> (1-SOS) or <b>1800-221-4444</b></p>
+            </div>
+            <div class="crisis-item">
+                <h3>💬 Mental Health Helpline (IMH)</h3>
+                <p>24/7 Hotline: <b>6389 2222</b></p>
+            </div>
+            <div class="crisis-item">
+                <h3>🏥 Emergency Room</h3>
+                <p>Go to your nearest hospital A&E for immediate help</p>
+            </div>
+        </div>
+        <button class="btn-secondary" onclick="closeModal('crisisModal')">Close</button>
+    </div>
+</div>
+
+    <script src="script.js"></script>
+
+    <!-- Word Puzzle Modal -->
+<div class="modal" id="wordPuzzleModal" style="display:none;">
+  <div class="modal-content game-modal" style="max-width: 500px;">
+    <h3 style="margin-bottom: 10px;">Positive Words</h3>
+    <div id="wordGrid" style="display: grid; grid-template-columns: repeat(8, 32px); gap: 4px; justify-content: center; margin-bottom: 12px;"></div>
+    <div style="margin-bottom: 8px;">
+      <input id="wordInput" type="text" placeholder="Type found word..." style="width: 180px; padding: 6px; border-radius: 4px; border: 1px solid #aaa;">
+      <button onclick="submitWord()" style="padding: 6px 14px; border-radius: 4px; background: #6366f1; color: #fff; border: none;">Submit</button>
+    </div>
+    <div id="foundWords" style="margin-bottom: 8px; color: #4ade80;"></div>
+  
+    <button onclick="closeModal('wordPuzzleModal')" style="margin-top: 8px;">Close</button>
+  </div>
+</div>
+
+<!-- Click & Calm Modal -->
+<div class="modal" id="clickCalmModal" style="display:none;">
+  <div class="modal-content game-modal" style="max-width: 400px; text-align: center;">
+    <h3 style="margin-bottom: 10px;">Click & Calm</h3>
+    <div style="margin-bottom: 12px;">
+      <button id="clickBtn" style="font-size:2rem;padding:1rem 2rem;">Click Me!</button>
+    </div>
+    <div>Clicks: <span id="clickCount">0</span></div>
+    <div id="clickTimer" style="margin: 8px 0; color: #aaa;"></div>
+    <button onclick="closeModal('clickCalmModal')" style="margin-top: 8px;">Close</button>
+  </div>
+</div>
+</body>
+</html>
