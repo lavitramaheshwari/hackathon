@@ -103,31 +103,7 @@ function selectSupport(type) {
     }, 10);
 }
 
-function updateQuickActions(type) {
-    const quickActions = document.getElementById('quickActions');
-    const actions = {
-        academic: [
-            { icon: '📝', text: 'Homework Help', action: 'homework' },
-            { icon: '📊', text: 'Exam Prep', action: 'exam' },
-            { icon: '📖', text: 'Study Tips', action: 'study' },
-            { icon: '🎯', text: "Can't Focus", action: 'focus' },
-            { icon: '⏰', text: 'Time Management', action: 'time' }
-        ],
-        social: [
-            { icon: '👥', text: 'Friend Issues', action: 'friends' },
-            { icon: '💔', text: 'Feeling Lonely', action: 'lonely' },
-            { icon: '🤝', text: 'Making Friends', action: 'makefriends' },
-            { icon: '😰', text: 'Peer Pressure', action: 'pressure' },
-            { icon: '💬', text: 'Communication', action: 'communication' }
-        ],
-        emotional: [
-            { icon: '😰', text: 'Anxiety', action: 'anxiety' },
-            { icon: '😢', text: 'Feeling Down', action: 'sad' },
-            { icon: '😤', text: 'Stress', action: 'stress' },
-            { icon: '😴', text: "Can't Sleep", action: 'sleep' },
-            { icon: '🤗', text: 'Need Support', action: 'support' }
-        ]
-    };
+
     
     quickActions.innerHTML = actions[type].map(action => 
         `<button class="quick-btn" onclick="quickQuestion('${action.action}')">${action.icon} ${action.text}</button>`
@@ -1333,4 +1309,5 @@ style.textContent = `
         to { transform: translateX(100%); opacity: 0; }
     }
 `;
+
 document.head.appendChild(style);
